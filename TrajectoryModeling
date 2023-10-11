@@ -1,55 +1,49 @@
-/**
- * Asks user to input a distance. The program with go through a series of nested for loops to find the best angle and speed for the artillery shell to hit the target.
- * 
- * @author Aaron Zheng
- * @version 09/28/23
- **/
- 
 import java.util.Scanner;
 
 public class TrajectoryModeling {
 
 	public static void main(String[] args) {
-   Scanner scnr = new Scanner(System.in);
-      double gravity = 9.8;
-      int minAngle = 25;
-      int maxAngle = 90;
-      int minSpeed = 1;
-      int maxSpeed = 30;
-      double bestSpeed = 0;
-      double bestAngle = 0;
-      double bestDistance = Double.MAX_VALUE;
-      double bestDifference = Double.MAX_VALUE;
-      
-      //Asks user to input a distance
-      System.out.println("Enter a distance to target: ");
-      double distance = scnr.nextDouble();
-      
-      //for loops to find the best angle and speed
-      for (double vInitial = minSpeed; vInitial <= maxSpeed; vInitial++) {
-         for (double angle = minAngle; angle < maxAngle; angle = angle + 5) {
-            double time = (2 * vInitial * Math.sin(Math.toRadians(angle))) / gravity;
-            double calcDistance = (vInitial * time * Math.cos(Math.toRadians(angle)));
-            
-            //Finds the difference
-            double difference = distance - calcDistance;
-            double absDifference = Math.abs(difference);
-            
-            //Initializes best speed and angle
-            if (absDifference < bestDifference) {
-               bestDifference = absDifference;
-               bestSpeed = vInitial;
-               bestAngle = angle;
-            }
-         }
-      }
-       //Finds the distance travelled
-       double distTravelled = distance - bestDifference;
-       
-       //Prints best angle, speed, distance travelled, and distance from target center
-       System.out.printf("Best angle: %.2f\n", bestAngle);
-       System.out.printf("Best speed: %.2f\n", bestSpeed);
-       System.out.printf("Distance travelled: %.2f\n", distTravelled); 
-       System.out.printf("Missed the target center by: %.2f\n", bestDifference);
+		
+		Scanner scnr = new Scanner(System.in);
+	      double gravity = 9.8;
+	      int minAngle = 25;
+	      int maxAngle = 90;
+	      int minSpeed = 1;
+	      int maxSpeed = 30;
+	      double bestSpeed = 0;
+	      double bestAngle = 0;
+	      double bestDistance = Double.MAX_VALUE;
+	      double bestDifference = Double.MAX_VALUE;
+	      
+	      //Asks user to input a distance
+	      System.out.println("Enter a distance to target between 3-30 meters: ");
+	      double distance = scnr.nextDouble();
+	      
+	      //for loops to find the best angle and speed
+	      for (double vInitial = minSpeed; vInitial <= maxSpeed; vInitial++) {
+	         for (double angle = minAngle; angle < maxAngle; angle = angle + 5) {
+	            double time = (2 * vInitial * Math.sin(Math.toRadians(angle))) / gravity;
+	            double calcDistance = (vInitial * time * Math.cos(Math.toRadians(angle)));
+	            
+	            //Finds the difference
+	            double difference = distance - calcDistance;
+	            double absDifference = Math.abs(difference);
+	            
+	            //Initializes best speed and angle
+	            if (absDifference < bestDifference) {
+	               bestDifference = absDifference;
+	               bestSpeed = vInitial;
+	               bestAngle = angle;
+	            }
+	         }
+	      }
+	       //Finds the distance traveled
+	       double distTravelled = distance - bestDifference;
+	       
+	       //Prints best angle, speed, distance traveled, and distance from target center
+	       System.out.printf("Best angle: %.2f°\n", bestAngle);
+	       System.out.printf("Best speed: %.2f m/s\n", bestSpeed);
+	       System.out.printf("Distance travelled: %.2f meters\n", distTravelled); 
+	       System.out.printf("Missed the target center by: %.2f meters\n", bestDifference);
+		}
 	}
-}
